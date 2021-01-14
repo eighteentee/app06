@@ -128,8 +128,8 @@ public class Game
                 takeItem(command);
                 break;
                 
-            case FILL:
-                fill(command);
+            case SWAP:
+                swap(command);
                 break;
                
             case UNLOCK:
@@ -259,7 +259,7 @@ public class Game
         }
     }
     
-    private void fill(Command command)
+    private void swap(Command command)
     {
         if(currentRoom.hasWater())
         {

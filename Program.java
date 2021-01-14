@@ -4,6 +4,7 @@
  * class and then calls on its run method.
  *
  * @author Phill Horrocks
+ * @author Chris Edgley
  * @version 0.1
  */
 public class Program
