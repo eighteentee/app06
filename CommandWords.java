@@ -10,13 +10,12 @@ import java.util.HashMap;
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified by Phill Horrocks
+ * Modified by Phill Horrocks & Chris Edgley
  */
 
 public class CommandWords
 {
-    // A mapping between a command word and the CommandWord
-    // associated with it.
+    // A mapping between a command word and the CommandWord associated with it.
     private HashMap<String, CommandWord> validCommands;
 
     /**

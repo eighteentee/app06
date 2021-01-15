@@ -16,7 +16,7 @@ public class Program
      */
     public static void main()
     {
-        game = new Game("Phill");
+        game = new Game("Dr Who");
         game.play();
     }
 }

@@ -16,7 +16,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified by Phill Horrocks
+ * Modified by Phill Horrocks & Chris Edgley
  */
 
 public class Command
@@ -27,9 +27,10 @@ public class Command
     /**
      * Create a command object. First and second words must be supplied, but
      * the second may be null.
-     * @param commandWord The CommandWord. UNKNOWN if the command word
-     *                  was not recognised.
-     * @param secondWord The second word of the command. May be null.
+     * 
+     * commandWord The CommandWord. UNKNOWN if the command word was not recognised.
+     * 
+     * secondWord The second word of the command. May be null.
      */
     public Command(CommandWord commandWord, String secondWord)
     {
@@ -38,8 +39,7 @@ public class Command
     }
 
     /**
-     * Return the command word (the first word) of this command.
-     * @return The command word.
+     * Return the first command word.
      */
     public CommandWord getCommandWord()
     {
@@ -47,8 +47,7 @@ public class Command
     }
 
     /**
-     * @return The second word of this command. Returns null if there was no
-     * second word.
+     * Return second word of the command.
      */
     public String getSecondWord()
     {
@@ -56,7 +55,7 @@ public class Command
     }
 
     /**
-     * @return true if this command was not understood.
+     * True if the command is not recognised.
      */
     public boolean isUnknown()
     {
@@ -64,7 +63,7 @@ public class Command
     }
 
     /**
-     * @return true if the command has a second word.
+     * True if the command has a second command word
      */
     public boolean hasSecondWord()
     {

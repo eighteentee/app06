@@ -1,4 +1,3 @@
-
 /**
  * Enumeration class ItemTypes - write a description of the enum class here
  *
@@ -9,6 +8,9 @@ public enum ItemTypes
 {
     NONE("none"), KEY("keys"), BOTTLE("bottle"), WATER("water"), 
     FOOD("apples"), TREASURE("treasure");
+    
+    // NONE("none"), PASSWORD("password"), KEYCARD("keycard"), CUTTERS("cutters"),
+    // SCREWDRIVER("screwdriver"), OXYGEN("oxygen");
     
     private String itemString;
     

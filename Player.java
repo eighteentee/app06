@@ -3,17 +3,21 @@ import java.util.ArrayList;
 /**
  * This class stores information about the player
  * including the player's current state in terms
- * of energy, score and the number of turns so far.
+ * of oxygen, score and the number of turns so far.
  * The player can carry a number of items up to 
  * the maximum weight.
  *
- * @author Phill Horrocks
+ * @author Phill Horrocks & Chris Edgley
  * @version 0.1
  */
 public class Player
 {
-    public static final int MAX_ENERGY = 100;
-    public static final int MIN_ENERGY = 10;
+    // Setup the variable for the oxygen levels
+    // Player starts with 50 oxygen and must locate a spare tank
+    
+    public static final int MAX_OXYGEN = 100;
+    public static final int MIN_OXYGEN = 10;
+    public static final int START_OXYGEN = 50;
 
     public static final int MAX_PROVISION = 100;
     public static final int MIN_PROVISION = 10;
@@ -28,10 +32,14 @@ public class Player
     private int moves;
 
     private int energy;
+    
+    private int oxygen;
 
     private int water;
     
     private int food;
+    
+    private int startOxygen;
     
     private boolean alive;
 
@@ -50,7 +58,8 @@ public class Player
         
         food = MAX_PROVISION;
         water = MAX_PROVISION;
-        energy = MAX_ENERGY;
+        energy = MAX_OXYGEN;
+        startOxygen = START_OXYGEN;
 
         alive = true;
     }
@@ -94,7 +103,7 @@ public class Player
         useProvisions(ItemTypes.WATER, water);
         useProvisions(ItemTypes.FOOD, food);
         
-        if(energy < MIN_ENERGY)
+        if(energy < MIN_OXYGEN)
             alive = false;
     }
 
@@ -115,21 +124,21 @@ public class Player
         
     }
     
-    public int getEnergy()
+    public int getOxygen()
     {
-        return this.energy;
+        return this.oxygen;
     }
 
-    public void incEnergy(int increase)
+    public void incOxygen(int increase)
     {
         this.energy += increase;
-        if(energy > MAX_ENERGY)energy = MAX_ENERGY;
+        if(energy > MAX_OXYGEN)energy = MAX_OXYGEN;
     }
 
-    public void decEnergy(int decrease)
+    public void decOxygen(int decrease)
     {
         this.energy -= decrease;
-        if(energy < MIN_ENERGY)
+        if(energy < MIN_OXYGEN)
             alive = false;
     }
 
@@ -163,7 +172,7 @@ public class Player
     {
         String 
         output = "\n ----------------------------------------------" +
-            "\n | " + name + ": | Move " + moves + " | Energy = " + energy +
+            "\n | " + name + ": | Move " + moves + " | Oxygen = " + oxygen +
             " | Score = " + score + " |" +
             "\n ----------------------------------------------\n";
 
@@ -182,7 +191,7 @@ public class Player
         int count = 0;
         
         if(items.size() == 0)
-            inventory += "nothing!";
+            inventory += "nothing in your inventory";
         else
         {
             for(ItemTypes item : items)

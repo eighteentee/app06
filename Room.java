@@ -15,7 +15,7 @@ import java.util.Iterator;
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified by Phill Horrocks
+ * Modified by Phill Horrocks & Chris Edgley
  */
 
 public class Room 
@@ -77,13 +77,12 @@ public class Room
     /**
      * Return a description of the room in the form:
      * 
-     *     Exits: north west
+     * Exits: north west
      * @return A long description of this room
      */
     public String getLongDescription()
     {
-        String message =  " You are " + name + "\n\n You are " + 
-               description + ".\n";
+        String message =  "You are " + name + "\n\n You are " + description + ".\n";
         
         if(item != ItemTypes.NONE)
             message += itemDescription + "\n";
@@ -164,4 +163,3 @@ public class Room
         return (water == ItemTypes.WATER);
     }
 }
-

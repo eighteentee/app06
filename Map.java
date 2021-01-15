@@ -7,6 +7,7 @@
  */
 public class Map
 {
+    //Lets setup the map
     private Room building;
     private Room start;
     private Room eastForest;
@@ -20,6 +21,23 @@ public class Map
     private Room kingsHall;
     
     private String description;
+    
+    // There should be 12 rooms
+    
+    // private Room naviagtion;
+    // private Room corridor;
+    // private Room escapePod;
+    // private Room communications;
+    // private Room engineRoom;
+    // private Room medBay;
+    // private Room vent;
+    // private Room staffRoom;
+    // private Room electrical;
+    // private Room airLock;
+    // private Room outside;
+    // private Room reactor
+    
+    
     
     /**
      * Constructor for objects of class Map
@@ -37,6 +55,22 @@ public class Map
         createCobbles();
         createLargeChamber();
         createKingsHall();
+        
+        // createStart();
+        
+        // createNavigation();
+        // createCorridor();
+        // createEscapePod();
+        // createCommunications();
+        // createEngineRoom();
+        // createMedBay();
+        // createVent();
+        // createStaffRoom();
+        // createElectrical();
+        // createAirLock();
+        // createOutside();
+        // createReactor();
+        
     }
     
     public Room getStartRoom()
@@ -45,7 +79,7 @@ public class Map
     }
     
     /**
-     * This is the room the player starts in
+     * The starting room
      */
     private void createStart()
     {

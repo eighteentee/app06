@@ -16,12 +16,12 @@ import java.util.Scanner;
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified by Phill Horrocks 
+ * Modified by Phill Horrocks & Chris Edgley
  */
 public class Parser 
 {
-    private CommandWords commands;  // holds all valid command words
-    private Scanner reader;         // source of command input
+    private CommandWords commands;  // The command words
+    private Scanner reader;         // Text input
 
     /**
      * Create a parser to read from the terminal window.
@@ -34,28 +34,28 @@ public class Parser
 
     /**
      * @return The next command from the user.
+     * NB: Anything after two words entered is ignored
      */
     public Command getCommand() 
     {
-        String inputLine;   // will hold the full input line
+        String inputLine;
         String word1 = null;
         String word2 = null;
 
-        System.out.print("> ");     // print prompt
+        System.out.print("> ");
 
         inputLine = reader.nextLine().toLowerCase();
 
-        // Find up to two words on the line.
+        // Check up to two words in the Scanner
         Scanner tokenizer = new Scanner(inputLine);
         
         if(tokenizer.hasNext()) 
         {
-            word1 = tokenizer.next();      // get first word
+            word1 = tokenizer.next(); // this is the first word
         
             if(tokenizer.hasNext()) 
             {
-                word2 = tokenizer.next();      // get second word
-                // note: we just ignore the rest of the input line.
+                word2 = tokenizer.next(); // this is the second word
             }
         }
 
