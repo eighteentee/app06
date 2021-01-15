@@ -29,7 +29,7 @@ public class Room
     private HashMap<String, Room> exits;        
     
     private ItemTypes item;
-    private ItemTypes water;
+    private ItemTypes oxygen;
     
     private String itemDescription;
     
@@ -47,7 +47,7 @@ public class Room
         
         exits = new HashMap<>();
         item = ItemTypes.NONE;
-        water = ItemTypes.NONE;
+        oxygen = ItemTypes.NONE;
     }
 
     public int getID()
@@ -97,7 +97,7 @@ public class Room
      */
     private String getExitString()
     {
-        String returnString = "\n Exits:";
+        String returnString = "\n Exits: ";
         Set<String> keys = exits.keySet();
         
         for(String exit : keys) 
@@ -153,13 +153,13 @@ public class Room
         item = ItemTypes.NONE;
     }
     
-    public void setWater()
+    public void setOxygen()
     {
-        water = ItemTypes.WATER;
+        oxygen = ItemTypes.OXYGEN;
     }
     
-    public boolean hasWater()
+    public boolean hasOxygen()
     {
-        return (water == ItemTypes.WATER);
+        return (oxygen == ItemTypes.OXYGEN);
     }
 }

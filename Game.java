@@ -13,7 +13,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified and extended by Phill Horrocks
+ * Modified and extended by Phill Horrocks & Chris Edgley
  * Version 0.1
  */
 
@@ -31,6 +31,9 @@ public class Game
     
     private boolean grateLocked;
     
+    // private boolean powerOff;
+    // private boolean launchDisabled;
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -40,7 +43,9 @@ public class Game
         
         map = new Map();
         currentRoom = map.getStartRoom();
-        grateLocked = false;
+        //grateLocked = false;
+        grateLocked = true;
+        //
         
         parser = new Parser();
     }
@@ -62,7 +67,7 @@ public class Game
             
             if(!player.isAlive())
             {
-                System.out.println(" \n You have died of lack of water or food!\n");
+                System.out.println(" \n Your oxygen has run out. You have died.\n");
                 finished = true;
             }
             else if(player.isCarrying(ItemTypes.TREASURE))
@@ -102,7 +107,7 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-        player.decEnergy(COMMAND_ENERGY);
+        player.decOxygen(COMMAND_ENERGY);
         
         CommandWord commandWord = command.getCommandWord();
 
@@ -143,8 +148,6 @@ public class Game
         return wantToQuit;
     }
 
-    // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -168,7 +171,7 @@ public class Game
     {
         if(!command.hasSecondWord()) 
         {
-            // if there is no second word, we don't know where to go...
+            // Default response if no second word entered
             System.out.println(" Go where?");
             return;
         }
@@ -179,13 +182,13 @@ public class Game
 
         if (nextRoom == null) 
         {
-            System.out.println(" There is no exit!");
+            System.out.println(" There is no exit.");
         }
         else 
         {
             if((currentRoom.getID() == 10) && grateLocked)
             {
-                System.out.println(" The steel grate is locked!");
+                System.out.println("The steel grate is locked!");
             }
             else
             {
@@ -205,39 +208,38 @@ public class Game
         String object = command.getSecondWord();
         String stringItem = item.toString();
         
-        boolean wantsWater = object.equals("water");
+        boolean wantsOxygen = object.equals("oxygen");
         
         if(object == null)
         {
             System.out.println("\n What do you want to take?");
         }
-        else if((item == ItemTypes.NONE) && (!wantsWater))
+        else if((item == ItemTypes.NONE) && (!wantsOxygen))
         {
             System.out.println("\n There is nothing here to take!");
         }
         else
         {
-            if(object.equals(stringItem) || wantsWater)
+            if(object.equals(stringItem) || wantsOxygen)
             {
-                if(!wantsWater)
+                if(!wantsOxygen)
                 {
                     currentRoom.removeItem();
                 }
                 
-                if((wantsWater) && (!currentRoom.hasWater()))
+                if((wantsOxygen) && (!currentRoom.hasOxygen()))
                 {
-                    System.out.println("\n There is now water within reach!");
+                    System.out.println("\n There is now oxygen within reach!");
                 }
-                else if ((wantsWater && 
-                         (!player.isCarrying(ItemTypes.BOTTLE))))
+                else if ((wantsOxygen && (!player.isCarrying(ItemTypes.BOTTLE))))
                 {
-                    System.out.println("\n You do not have a bottle!");
+                    System.out.println("\n You do not have a oxygen tank.");
                     System.out.println(" You take a drink!");
-                    player.incEnergy(2);
+                    player.incOxygen(2);
                 }
                 else
                 {
-                    if(!wantsWater)
+                    if(!wantsOxygen)
                     {
                         player.addItem(item);
                         player.incScore(TAKE_SCORE);
@@ -245,7 +247,7 @@ public class Game
                     }
                     else
                     {
-                        System.out.println("\n You have filled the bottle with water!");
+                        System.out.println("\n You have filled the oxygen tank with oxygen");
                     }
                     
                     System.out.println(player);
@@ -261,13 +263,13 @@ public class Game
     
     private void swap(Command command)
     {
-        if(currentRoom.hasWater())
+        if(currentRoom.hasOxygen())
         {
             String object = command.getSecondWord();
             
             if(object.equals(ItemTypes.BOTTLE.toString()))
             {
-                player.addItem(ItemTypes.WATER);
+                player.addItem(ItemTypes.OXYGEN);
                 player.incScore(TAKE_SCORE);
                 
                 System.out.println(player);
@@ -275,12 +277,12 @@ public class Game
             }
             else
             {
-                System.out.println(" You do not have a bottle!");
+                System.out.println(" You do not have a spare oxygen tank");
             }
         }
         else
         {
-            System.out.println(" There is no water here!");
+            System.out.println(" There is no oxygen here");
         }
     }
     

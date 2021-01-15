@@ -7,7 +7,7 @@
 public enum ItemTypes
 {
     NONE("none"), KEY("keys"), BOTTLE("bottle"), WATER("water"), 
-    FOOD("apples"), TREASURE("treasure");
+    FOOD("apples"), TREASURE("treasure"), OXYGEN("oxygen");
     
     // NONE("none"), PASSWORD("password"), KEYCARD("keycard"), CUTTERS("cutters"),
     // SCREWDRIVER("screwdriver"), OXYGEN("oxygen");
