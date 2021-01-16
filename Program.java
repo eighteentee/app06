@@ -18,9 +18,9 @@ public class Program
     public static void main()
     {
         String name;
-        Scanner user_input = new Scanner( System.in );
-        System.out.println("Enter your  name: ");
-        name = user_input.next( );
+        Scanner user_input = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        name = user_input.next();
         System.out.println ("Your name is:" + name);
         
         game = new Game(name);

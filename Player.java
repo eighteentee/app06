@@ -14,6 +14,8 @@ public class Player
 {
     public static final int MAX_ENERGY = 10000000;
     public static final int MIN_ENERGY = 10;
+    
+    public static final int MAX_OXYGEN = 100;
 
     public static final int MAX_PROVISION = 100000000;
     public static final int MIN_PROVISION = 1;
@@ -33,6 +35,8 @@ public class Player
     
     private int food;
     
+    private int oxygen;
+    
     private boolean alive;
 
     private ArrayList<ItemTypes> items;
@@ -51,6 +55,8 @@ public class Player
         food = MAX_PROVISION;
         water = MAX_PROVISION;
         energy = MAX_ENERGY;
+        
+        oxygen = MAX_OXYGEN;
 
         alive = true;
     }
@@ -160,6 +166,7 @@ public class Player
     }    
 
     public String toString()
+    // TODO: Change energy to 'oxygen'
     {
         String 
         output = "\n ----------------------------------------------" +
