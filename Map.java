@@ -3,10 +3,13 @@
 /**
  * Write a description of class Map here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Chris Edgley & Phill Horrocks
+ * @version 
  */
 public class Map
+
+//TODO change rooms around and room exists
+
 {
     private Room start;
     private Room building;   
@@ -40,6 +43,8 @@ public class Map
      */
     public Map()
     {
+        // Room numbers
+        
         createStart(); // 0
         createBuilding(); // 1
         createEastForest(); // 2
@@ -99,6 +104,7 @@ public class Map
         
         start.setWater();
         start.setDescription(description);
+        //Rename to TANK
         start.setItem(ItemTypes.BOTTLE, "\n There is an empty oxygen tank lying in the corner");
     }
     
@@ -120,7 +126,8 @@ public class Map
         "console screen above, you decide you must act fast.";
         
         building.setDescription(description);
-        building.setItem(ItemTypes.KEY, "\n There is an escape pod launch code card here.");
+        //TODO rename to PASSKEY
+        building.setItem(ItemTypes.KEY, "\n There is a passkey marked Engine Room here.");
         connectRooms(start, "north", building);
     }
 
@@ -133,6 +140,7 @@ public class Map
         "back to the main ship but you see the engine room has been burst open,\n"+
         "possibly by one of your crewmates before they deserted the ship.";
         
+        //TODO Set electrical switch mechanic to enable the escape pod
         eastForest.setDescription(description);        
 
         connectRooms(start, "east", eastForest);        
@@ -169,9 +177,9 @@ public class Map
         
         valley.setDescription(description);
         
+        //TODO change the setWater method to setOxygen and FOOD to something else
         valley.setWater();
-        valley.setItem(ItemTypes.FOOD, 
-            "\n There are a couple of apple trees with fruit");
+        valley.setItem(ItemTypes.FOOD, "\n There are a couple of apple trees with fruit");
             
         connectRooms(start, "south", valley);
         
@@ -194,9 +202,9 @@ public class Map
         "engine room, which is currently open with steam and sparks emitting from\n"+
         "the broken systems that lie beyond. On top of one of the upturned beds,\n"+
         "you can just make out the top of what looks like a yellow oxygen tank.\n"+
-        "On the floor you spot an oxygen hose";
+        "On the floor you spot an oxygen outlet";
         
-        // use the oxygen hose to fill the oxygen tank
+        // use the oxygen outlet to fill the oxygen tank
         
         slit.setDescription(description);
         slit.setWater();
@@ -208,7 +216,7 @@ public class Map
     {
         grate = new Room(9, "in the ship's engine room");
         
-        // TODO: Need to put the passkey for this door 
+        // TODO: Need to have the passkey for this door from the ships bridge
         
         description = 
         "in the ship’s engine room. Here, the power source of the ship’s\n"+
@@ -222,6 +230,8 @@ public class Map
         "is asking for a passkey... Beyond the door you can see ladders\n"+
         "descending into the darkness...";
 
+        //TODO change the grate to the door
+        
         grate.setDescription(description);
         connectRooms(grate, "north", slit);
     }
@@ -237,6 +247,8 @@ public class Map
         "its way along with you. Up ahead you can make out flashing red\n"+
         "alarm lights again";
         
+        
+        //TODO change vertical direction over to the the corridor
         smallChamber.setDescription(description);
         connectRooms(smallChamber, "up", grate);
     }
@@ -352,6 +364,7 @@ public class Map
     }
     
     private Room cloneRoom(int id, Room toClone)
+    //TODO remove the clone room
     {
         Room room = new Room(id, toClone.getName());
         room.setDescription(toClone.getDescription());
@@ -363,6 +376,8 @@ public class Map
      * Create all the rooms and link their exits together.
      * and return the current room for the player to start
      */
+     
+    //TODO Delete this method
     public Room createTestRooms()
     {
         Room outside, theater, pub, lab, office;

@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\n\ This\ class\ stores\ information\ about\ the\ player\n\ including\ the\ player's\ current\ state\ in\ terms\n\ of\ energy,\ score\ and\ the\ number\ of\ turns\ so\ far.\n\ The\ player\ can\ carry\ a\ number\ of\ items\ up\ to\ \n\ the\ maximum\ weight.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ This\ class\ stores\ information\ about\ the\ player\r\n\ including\ the\ player's\ current\ state\ in\ terms\r\n\ of\ energy,\ score\ and\ the\ number\ of\ turns\ so\ far.\r\n\ The\ player\ can\ carry\ a\ number\ of\ items\ up\ to\ \r\n\ the\ maximum\ weight.\r\n\r\n\ @author\ Chris\ Edgley\ &\ Phill\ Horrocks\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=name
 comment1.target=Player(java.lang.String)
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Player\n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Player\r\n
 comment10.params=
 comment10.target=int\ getEnergy()
 comment11.params=increase

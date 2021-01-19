@@ -2,12 +2,12 @@
 /**
  * Enumeration class ItemTypes - write a description of the enum class here
  *
- * @author (your name here)
- * @version (version number or date here)
+ * @author Chris Edgley & Phill Horrocks
+ * @version 
  */
 public enum ItemTypes
 {
-    NONE("none"), KEY("keys"), BOTTLE("bottle"), WATER("water"), 
+    NONE("none"), KEY("Keycard"), BOTTLE("Oxygen Tank"), WATER("Oxygen Outlet"), 
     FOOD("apples"), TREASURE("treasure");
     
     private String itemString;

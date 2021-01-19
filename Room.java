@@ -12,8 +12,8 @@ import java.util.Iterator;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Chris Edgley & Phill Horrocks
+ * @version 
  */
 
 public class Room 
@@ -27,6 +27,7 @@ public class Room
     private HashMap<String, Room> exits;        
     
     private ItemTypes item;
+    //TODO Rename to oxygen
     private ItemTypes water;
     
     private String itemDescription;

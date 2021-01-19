@@ -10,17 +10,13 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
- * 
- * Modified and extended by Derek Peacock and Nick
- * October 26th 2020
- * Version 0.1
+ * @author Chris Edgley & Phill Horrocks
+ * @version 
  */
 
 public class Game 
 {
-    public static final int TAKE_SCORE = 100;
+    public static final int TAKE_SCORE = 50;
     public static final int COMMAND_ENERGY = 2;
     
     public static final char CLEAR_SCREEN ='\u000C';
@@ -30,7 +26,12 @@ public class Game
     private Player player;
     private Map map;
     
+    
+    //Setup logic
     private boolean grateLocked;
+    //private boolean engineRoomLocked;
+    //private boolean electricityOff;
+    //private boolean isLeverPulled;
     
     /**
      * Create the game and initialise its internal map.
@@ -66,21 +67,20 @@ public class Game
             
             if(!player.isAlive())
             {
-                System.out.println(" \n You have died of lack of water or food!\n");
+                System.out.println(" \n You have died due life support failure!\n");
                 finished = true;
             }
             else if(player.isCarrying(ItemTypes.TREASURE))
             {
-                System.out.println(" \n You have found fabulous treasure!");
+                System.out.println(" You have found fabulous treasure!");
                 System.out.println(" and are setup for life!\n");
-                System.out.println(" I just hope you can find your way out " + 
-                                   "of this cave system\n");
+                System.out.println(" I just hope you can find your way out");
                 
                 finished = true;               
             }
         }
         
-        System.out.println(" Thank you for playing.  Good bye.");
+        System.out.println(" Thanka you so mucha for playing my gamee.  Good bye.");
     }
 
     /**
@@ -113,7 +113,7 @@ public class Game
         switch (commandWord) 
         {
             case UNKNOWN:
-                System.out.println(" I don't know what you mean...");
+                System.out.println("Please can you be more specific");
                 break;
 
             case HELP:
@@ -159,7 +159,7 @@ public class Game
         System.out.println(player);
         System.out.println(" You are currently " + currentRoom.getShortDescription());
         System.out.println();
-        System.out.println(" Your command words are:");
+        System.out.println(" Your command phrases are:");
         
         parser.showCommands();
     }
@@ -184,13 +184,13 @@ public class Game
 
         if (nextRoom == null) 
         {
-            System.out.println(" There is no exit!");
+            System.out.println("You can not go this way!");
         }
         else 
         {
             if((currentRoom.getID() == 10) && grateLocked)
             {
-                System.out.println(" The steel grate is locked!");
+                System.out.println(" The Engine Room Door is locked!");
             }
             else
             {
@@ -231,7 +231,7 @@ public class Game
                 
                 if((wantsWater) && (!currentRoom.hasWater()))
                 {
-                    System.out.println("\n There is now water within reach!");
+                    System.out.println("\n There is no water within reach!");
                 }
                 else if ((wantsWater && 
                          (!player.isCarrying(ItemTypes.BOTTLE))))
@@ -250,7 +250,7 @@ public class Game
                     }
                     else
                     {
-                        System.out.println("\n You have filled the bottle with water!");
+                        System.out.println("\n You have filled the oxygen tank with oxygen!");
                     }
                     
                     System.out.println(player);
@@ -265,6 +265,7 @@ public class Game
     }
     
     private void fill(Command command)
+    //TODO Change BOTTLE to tank, change WATER to OXYGEN
     {
         if(currentRoom.hasWater())
         {
@@ -290,15 +291,16 @@ public class Game
     }
     
     private void unlockGrate()
+    //TODO change grate to engine room
     {
         if(player.isCarrying(ItemTypes.KEY))
         {
             grateLocked = false;
-            System.out.println(" You have unlocked the grate!");
+            System.out.println(" You have unlocked the engine room door!");
         }
         else
         {
-            System.out.println(" You cannot unlock the grate without keys!");
+            System.out.println(" You cannot unlock the engine room door without keycard!");
         }
     }
     
