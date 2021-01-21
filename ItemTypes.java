@@ -7,7 +7,7 @@
  */
 public enum ItemTypes
 {
-    NONE("none"), KEY("Keycard"), BOTTLE("Oxygen Tank"), WATER("Oxygen Outlet"), 
+    NONE("none"), KEY("key"), BOTTLE("bottle"), WATER("water"), 
     FOOD("apples"), TREASURE("treasure");
     
     private String itemString;

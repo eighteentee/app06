@@ -31,7 +31,7 @@ public class Map
     //private Room mobileServicing;
     //private Room communications;
     //private Room medbay;
-    //private Room engineRoom;
+    //private Room engineRoom; //grate
     //private Room vent;
     //private Room corridor;
     //private Room reactor; // generates airlock and damaged pod
@@ -114,7 +114,7 @@ public class Map
      */
     private void createBuilding()
     {
-        building = new Room(2, "inside the staff room");
+        building = new Room(1, "inside the staff room");
         
         description = 
         "in the staff room, chairs and tables are strewn around everywhere\n"+
@@ -133,7 +133,7 @@ public class Map
 
     private void createEastForest()
     {
-        eastForest = new Room(3, "in the ship's main electrical room.");
+        eastForest = new Room(2, "in the ship's main electrical room.");
         
         description = 
         "in the electrical room, wires and steam currently block your path\n"+
@@ -148,7 +148,7 @@ public class Map
     
     private void createWestForest()
     {
-       westForest = new Room(4, "in the ship's mobile service system.");
+       westForest = new Room(3, "in the ship's mobile service system.");
         
        description =  
        "in the Mobile Service System, normally, this is a dedicated area for\n"+
@@ -166,7 +166,7 @@ public class Map
      */
     private void createValley()
     {
-        valley = new Room(5, "in the ship's communications room");
+        valley = new Room(4, "in the ship's communications room");
         
         description = 
         "in the communications room it is surprisingly unaffected by the\n"+
@@ -193,7 +193,7 @@ public class Map
 
     private void createSlit()
     {
-        slit = new Room(8, "in the ship's medical bay");
+        slit = new Room(5, "in the ship's medical bay");
         
         description = 
         "in the medbay, medical computers, beds and equipment are in complete\n"+
@@ -214,7 +214,7 @@ public class Map
     
     private void createGrate()
     {
-        grate = new Room(9, "in the ship's engine room");
+        grate = new Room(6, "in the ship's engine room");
         
         // TODO: Need to have the passkey for this door from the ships bridge
         
@@ -238,7 +238,7 @@ public class Map
     
     private void createSmallChamber()
     {
-        smallChamber = new Room(10, "in a ventillation shaft");
+        smallChamber = new Room(7, "in a ventillation shaft");
         
         description = 
         "descending the ladders, you pathway is blocked and your only way\n"+
@@ -255,7 +255,7 @@ public class Map
     
     private void createCobbles()
     {
-        cobbles = new Room(10, "in a small connecting corridor");
+        cobbles = new Room(8, "in a small connecting corridor");
         
         description = 
         "in a corridor heading towards the main ship's reactor. The path to the\n"+
@@ -272,7 +272,7 @@ public class Map
     
     private void createLargeChamber()
     {
-        largeChamber = new Room(10, "in a large chamber");
+        largeChamber = new Room(9, "in a large chamber");
         
         description = "in a splendid chamber thirty feet high.";
         description.join("\nThe walls are frozen rivers of orange stone. ",
@@ -283,7 +283,7 @@ public class Map
         
         
         // Create the extra rooms off the main reactor room
-        Room pit = new Room(11, "in the ship's airlock");
+        Room pit = new Room(10, "in the ship's airlock");
         description = 
         "You enter the ships airlock. Normally this is a safe area. However,\n"+
         "the ship's systems have been badly damaged and you find that the door\n"+
@@ -295,7 +295,7 @@ public class Map
         
         connectRooms(pit, "west", largeChamber);
     
-        Room  jumble = new Room(12, "in one of the two escape pods");
+        Room  jumble = new Room(11, "in one of the two escape pods");
         description = 
         "in the second escape pod. It has been critically damaged and it's nose\n"+
         "has almost entirely been smashed off by high-speed debris. None of the\n"+
@@ -315,7 +315,7 @@ public class Map
     
     private void createKingsHall()
     {
-        kingsHall = new Room(14, "in ship's primary escape pod");
+        kingsHall = new Room(12, "in ship's primary escape pod");
         
         description = 
         "in the Escape Pod. This is, by comparison to the rest of the ship,\n"+

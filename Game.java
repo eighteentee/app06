@@ -42,7 +42,7 @@ public class Game
         
         map = new Map();
         currentRoom = map.getStartRoom();
-        grateLocked = false;
+        grateLocked = true;
         
         parser = new Parser();
     }
@@ -188,7 +188,7 @@ public class Game
         }
         else 
         {
-            if((currentRoom.getID() == 10) && grateLocked)
+            if((currentRoom.getID() == 6) && grateLocked)
             {
                 System.out.println(" The Engine Room Door is locked!");
             }
