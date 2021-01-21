@@ -25,10 +25,9 @@ public class Game
     private Room currentRoom;
     private Player player;
     private Map map;
-    
+    private boolean finished = false;
     
     //Setup logic
-    private boolean grateLocked;
     //private boolean engineRoomLocked;
     //private boolean electricityOff;
     //private boolean isLeverPulled;
@@ -42,7 +41,7 @@ public class Game
         
         map = new Map();
         currentRoom = map.getStartRoom();
-        grateLocked = true;
+        
         
         parser = new Parser();
     }
@@ -135,9 +134,9 @@ public class Game
             case FILL:
                 fill(command);
                 break;
-               
-            case UNLOCK:
-                unlockGrate();
+                
+            case LAUNCH:
+                launch(command);
                 break;
                 
             case QUIT:
@@ -188,19 +187,13 @@ public class Game
         }
         else 
         {
-            if((currentRoom.getID() == 6) && grateLocked)
-            {
-                System.out.println(" The Engine Room Door is locked!");
-            }
-            else
-            {
                 currentRoom = nextRoom;
                 
                 player.incMoves();
                 
                 System.out.println(player);
                 System.out.println(currentRoom.getShortDescription());
-            }
+            
         }
     }
 
@@ -264,6 +257,15 @@ public class Game
         }
     }
     
+    private void launch(Command command)
+    {
+        if (player.isCarrying(ItemTypes.KEY))
+        {
+         finished = true;
+         System.out.println("Hoozah");
+        }
+    }  
+    
     private void fill(Command command)
     //TODO Change BOTTLE to tank, change WATER to OXYGEN
     {
@@ -290,19 +292,12 @@ public class Game
         }
     }
     
-    private void unlockGrate()
-    //TODO change grate to engine room
+    private void airlock()
     {
-        if(player.isCarrying(ItemTypes.KEY))
-        {
-            grateLocked = false;
-            System.out.println(" You have unlocked the engine room door!");
-        }
-        else
-        {
-            System.out.println(" You cannot unlock the engine room door without keycard!");
-        }
-    }
+        if (currentRoom.getID()==10);
+        finished = true;
+        System.out.println("You have blasted off into space");
+    }    
     
     /** 
      * "Quit" was entered. Check the rest of the command to see

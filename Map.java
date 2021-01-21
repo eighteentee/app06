@@ -267,7 +267,7 @@ public class Map
         
         
         cobbles.setDescription(description);
-        connectRooms(cobbles, "west", smallChamber);
+        connectRooms(cobbles, "north", smallChamber);
     }
     
     private void createLargeChamber()
@@ -279,7 +279,7 @@ public class Map
             "There are passages off in all directions.");
         
         largeChamber.setDescription(description);
-        connectRooms(largeChamber, "west", cobbles);
+        connectRooms(largeChamber, "north", cobbles);
         
         
         // Create the extra rooms off the main reactor room
@@ -330,7 +330,7 @@ public class Map
             "\n the console has a large switch with a cover that needs taking off");
         
         kingsHall.setDescription(description);
-        connectRooms(kingsHall, "south", largeChamber);        
+        connectRooms(kingsHall, "east", largeChamber);        
     }
     
     private void connectRooms(Room room, String direction, Room otherRoom)
@@ -363,46 +363,4 @@ public class Map
         }        
     }
     
-    private Room cloneRoom(int id, Room toClone)
-    //TODO remove the clone room
-    {
-        Room room = new Room(id, toClone.getName());
-        room.setDescription(toClone.getDescription());
-
-        return room;
-    }
-    
-    /**
-     * Create all the rooms and link their exits together.
-     * and return the current room for the player to start
-     */
-     
-    //TODO Delete this method
-    public Room createTestRooms()
-    {
-        Room outside, theater, pub, lab, office;
-      
-        // create the rooms
-        outside = new Room(1, " outside the main entrance of the university");
-        theater = new Room(2, " in a lecture theater");
-        pub = new Room(3, " in the campus pub");
-        lab = new Room(4, " in a computing lab");
-        office = new Room(5, " in the computing admin office");
-        
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        return outside;  // start game outside
-    }
 }
