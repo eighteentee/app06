@@ -17,20 +17,20 @@
 public class Game 
 {
     public static final int TAKE_SCORE = 50;
-    public static final int COMMAND_ENERGY = 2;
+    public static final int COMMAND_ENERGY = 5;
     
     public static final char CLEAR_SCREEN ='\u000C';
     
     private Parser parser;
     private Room currentRoom;
+    private Room nextRoom;
     private Player player;
     private Map map;
     private boolean finished = false;
-    
+    private boolean leverIsOn = false;
     //Setup logic
-    //private boolean engineRoomLocked;
-    //private boolean electricityOff;
-    //private boolean isLeverPulled;
+  
+    
     
     /**
      * Create the game and initialise its internal map.
@@ -42,10 +42,8 @@ public class Game
         map = new Map();
         currentRoom = map.getStartRoom();
         
-        
         parser = new Parser();
     }
-
 
     /**
      *  Main play routine.  Loops until end of play.
@@ -54,11 +52,11 @@ public class Game
     {            
         printWelcome();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
+        //Enter the main command loop.  Here we repeatedly read commands and
+        //execute them until the game is over.
                 
         boolean finished = false;
-        
+        boolean leverIsOn = false;
         while (! finished) 
         {
             Command command = parser.getCommand();
@@ -66,31 +64,49 @@ public class Game
             
             if(!player.isAlive())
             {
-                System.out.println(" \n You have died due life support failure!\n");
+                System.out.println(" \n You have died due to life support failure!\n");
                 finished = true;
             }
-            else if(player.isCarrying(ItemTypes.TREASURE))
+
+            else if (player.isCarrying(ItemTypes.KEY) && currentRoom.getID() == 12 && leverIsOn == false)
             {
-                System.out.println(" You have found fabulous treasure!");
-                System.out.println(" and are setup for life!\n");
-                System.out.println(" I just hope you can find your way out");
+                System.out.println("Quick!Use the passkey!");
+                leverIsOn = true;
+            } 
+            
+            else if(player.isCarrying(ItemTypes.KEY) && currentRoom.getID() == 12 && leverIsOn == true)
+            {
                 
-                finished = true;               
+                System.out.println("You flash the passkey and slam that now opened button to get way away from the collapsing ship! your life is saved!");
+                finished = true;
             }
+            
+            else if(player.isAlive() && currentRoom.getID() == 10 && !player.isCarrying(ItemTypes.DOORKEY))
+            {
+                System.out.println(" YOU HAVE DIED IN THE SHIP'S FAULTY AIRLOCK");
+                
+                finished = true; 
+            }
+            else if(player.isAlive() && currentRoom.getID() == 10 && player.isCarrying(ItemTypes.DOORKEY))
+            {
+               System.out.println("You were fortunate to have the Airlock Key! Escape while you still can!");
+               finished = false;
+               
+            }   
         }
         
-        System.out.println(" Thanka you so mucha for playing my gamee.  Good bye.");
+        System.out.println("Thanks for playing our game. Hope to see you again soon!");
     }
-
+  
     /**
      * Print out the opening message for the player.
      */
     private void printWelcome()
     {
         System.out.println(CLEAR_SCREEN);
-        System.out.println(" Welcome to the World of Zuul!");
-        System.out.println(" World of Zuul is a new, incredibly exiting adventure game.");
-        System.out.println(" Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println(" Welcome to The Abandoned Spaceship!");
+        System.out.println(" The Abandoned Spaceship is a new, incredibly exiting adventure game.");
+        System.out.println(" Please Type '" + CommandWord.HELP + "' if you need any help!");
         System.out.println();
         
         System.out.println(player);
@@ -112,7 +128,7 @@ public class Game
         switch (commandWord) 
         {
             case UNKNOWN:
-                System.out.println("Please can you be more specific");
+                System.out.println("Please can you be more specific? I can't understand you.");
                 break;
 
             case HELP:
@@ -146,7 +162,7 @@ public class Game
         return wantToQuit;
     }
 
-    // implementations of user commands:
+    //implementations of user commands:
 
     /**
      * Print out some help information.
@@ -171,14 +187,14 @@ public class Game
     {
         if(!command.hasSecondWord()) 
         {
-            // if there is no second word, we don't know where to go...
-            System.out.println(" Go where?");
+            //if there is no second word, we don't know where to go...
+            System.out.println("Where do you want to go?");
             return;
         }
 
         String direction = command.getSecondWord();
 
-        // Try to leave current room.
+        //Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) 
@@ -203,39 +219,39 @@ public class Game
         String object = command.getSecondWord();
         String stringItem = item.toString();
         
-        boolean wantsWater = object.equals("water");
+        boolean wantsOxygen = object.equals("oxygen");
         
         if(object == null)
         {
             System.out.println("\n What do you want to take?");
         }
-        else if((item == ItemTypes.NONE) && (!wantsWater))
+        else if((item == ItemTypes.NONE) && (!wantsOxygen))
         {
-            System.out.println("\n There is nothing here to take!");
+            System.out.println("\n You can not take something that isn't there!");
         }
         else
         {
-            if(object.equals(stringItem) || wantsWater)
+            if(object.equals(stringItem) || wantsOxygen)
             {
-                if(!wantsWater)
+                if(!wantsOxygen)
                 {
                     currentRoom.removeItem();
                 }
                 
-                if((wantsWater) && (!currentRoom.hasWater()))
+                if((wantsOxygen) && (!currentRoom.hasWater()))
                 {
-                    System.out.println("\n There is no water within reach!");
+                    System.out.println("\n There is no oxygen within reach!");
                 }
-                else if ((wantsWater && 
-                         (!player.isCarrying(ItemTypes.BOTTLE))))
-                {
-                    System.out.println("\n You do not have a bottle!");
-                    System.out.println(" You take a drink!");
-                    player.incEnergy(2);
-                }
+                // else if ((wantsOxygen && 
+                         // (!player.isCarrying(ItemTypes.BOTTLE))))
+                // {
+                    // System.out.println("\n You do not have a tank!");
+                    // System.out.println(" You !");
+                    // player.incEnergy(2);
+                // }
                 else
                 {
-                    if(!wantsWater)
+                    if(!wantsOxygen)
                     {
                         player.addItem(item);
                         player.incScore(TAKE_SCORE);
@@ -259,11 +275,14 @@ public class Game
     
     private void launch(Command command)
     {
-        if (player.isCarrying(ItemTypes.KEY))
+        
+        if (player.isCarrying(ItemTypes.KEY) && currentRoom.getID() == 12)
         {
-         finished = true;
-         System.out.println("Hoozah");
+            leverIsOn = true;
+            System.out.println("You have used the key to be able to pull the lever");
+            
         }
+           
     }  
     
     private void fill(Command command)
@@ -275,7 +294,7 @@ public class Game
             
             if(object.equals(ItemTypes.BOTTLE.toString()))
             {
-                player.addItem(ItemTypes.WATER);
+                player.addItem(ItemTypes.OXYGEN);
                 player.incScore(TAKE_SCORE);
                 
                 System.out.println(player);
@@ -283,22 +302,15 @@ public class Game
             }
             else
             {
-                System.out.println(" You do not have a bottle!");
+                System.out.println(" You do not have a tank!");
             }
         }
         else
         {
-            System.out.println(" There is no water here!");
+            System.out.println(" There is no oxygen here!");
         }
     }
-    
-    private void airlock()
-    {
-        if (currentRoom.getID()==10);
-        finished = true;
-        System.out.println("You have blasted off into space");
-    }    
-    
+     
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -308,7 +320,7 @@ public class Game
     {
         if(command.hasSecondWord()) 
         {
-            System.out.println(" Quit what?");
+            System.out.println("What do you want to quit?");
             return false;
         }
         else 

@@ -12,29 +12,19 @@ import java.util.ArrayList;
  */
 public class Player
 {
-    public static final int MAX_ENERGY = 10000000;
+    public static final int MAX_ENERGY = 100;
     public static final int MIN_ENERGY = 10;
-    
-    public static final int MAX_OXYGEN = 100;
-
-    public static final int MAX_PROVISION = 100000000;
-    public static final int MIN_PROVISION = 1;
+    public static final int MAX_PROVISION = 100;
+    public static final int MIN_PROVISION = 10;
     public static final int PROVISION_LOSS = 1;
-    
-    public static final int MOVE_ENERGY = 1;
+    public static final int MOVE_ENERGY = 3;
     
     private String name;
-
+    
     private int score;
-
     private int moves;
-
     private int energy;
-
-    private int water;
-    
     private int food;
-    
     private int oxygen;
     
     private boolean alive;
@@ -53,10 +43,8 @@ public class Player
         moves = 0;
         
         food = MAX_PROVISION;
-        water = MAX_PROVISION;
+        oxygen = MAX_PROVISION;
         energy = MAX_ENERGY;
-        
-        oxygen = MAX_OXYGEN;
 
         alive = true;
     }
@@ -97,7 +85,7 @@ public class Player
         this.moves++;
         this.energy -= MOVE_ENERGY;
 
-        useProvisions(ItemTypes.WATER, water);
+        useProvisions(ItemTypes.OXYGEN, oxygen);
         useProvisions(ItemTypes.FOOD, food);
         
         if(energy < MIN_ENERGY)
@@ -113,7 +101,7 @@ public class Player
         }
         else
         {
-            water -= PROVISION_LOSS;
+            oxygen -= PROVISION_LOSS;
         }
         
         if(provision < MIN_PROVISION)
@@ -169,10 +157,10 @@ public class Player
     // TODO: Change energy to 'oxygen'
     {
         String 
-        output = "\n ----------------------------------------------" +
-            "\n | " + name + ": | Move " + moves + " | Energy = " + energy +
-            " | Score = " + score + " |" +
-            "\n ----------------------------------------------\n";
+        output = "\n ----------------------------------------------------------------------" +
+            "\n | " + name + ": | Move number: " + moves + " | Energy : " + energy +
+            " | Score:  " + score + " |" + " Oxygen: "+ oxygen + " |" + 
+                 "\n ----------------------------------------------------------------------\n";
 
         output += showItems();
         return output;

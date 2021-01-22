@@ -11,31 +11,33 @@ public class Map
 //TODO change rooms around and room exists
 
 {
-    private Room start;
-    private Room building;   
-    private Room eastForest;
-    private Room westForest;
-    private Room valley;
-    private Room slit;
-    private Room grate;
-    private Room smallChamber;
-    private Room cobbles;
-    private Room largeChamber;
-    private Room kingsHall;
+    // private Room start;
+    // private Room building;   
+    // private Room eastForest;
+    // private Room westForest;
+    // private Room valley;
+    // private Room slit;
+    // private Room grate;
+    // private Room smallChamber;
+    // private Room cobbles;
+    // private Room largeChamber;
+    // private Room kingsHall;
     
     private String description;
     
-    //private Room start;
-    //private Room navigation;
-    //private Room electrical;
-    //private Room mobileServicing;
-    //private Room communications;
-    //private Room medbay;
-    //private Room engineRoom; //grate
-    //private Room vent;
-    //private Room corridor;
-    //private Room reactor; // generates airlock and damaged pod
-    //private Room escapePod;
+    private Room start;
+    private Room staffroom;
+    private Room electrical;
+    private Room mobileServicing;
+    private Room communications;
+    private Room medbay;
+    private Room engineRoom; //grate
+    private Room vent;
+    private Room corridor;
+    private Room reactor; // generates airlock and damaged pod
+    private Room airlock;
+    private Room damagedPod;
+    private Room escapePod;
     
     
     /**
@@ -45,28 +47,33 @@ public class Map
     {
         // Room numbers
         
-        createStart(); // 0
-        createBuilding(); // 1
-        createEastForest(); // 2
-        createWestForest(); // 3
-        createValley(); // 4
-        createSlit(); // 5
-        createGrate(); // 6
-        createSmallChamber(); // 7
-        createCobbles(); // 8
-        createLargeChamber(); // 9
-        createKingsHall(); // 10
+        // createStart(); // 0
+        // createBuilding(); // 1
+        // createEastForest(); // 2
+        // createWestForest(); // 3
+        // createValley(); // 4
+        // createSlit(); // 5
+        // createGrate(); // 6
+        // createSmallChamber(); // 7
+        // createCobbles(); // 8
+        // createLargeChamber(); // 9
+        // createPit(); // 10
+        // createJumble(); // 11
+        // createKingsHall(); // 12
         
-        //createStart();
-        //createNavigation();
-        //createElectrical();
-        //createMobileServicing;
-        //createComms;
-        //createEngineRoom;
-        //createVent;
-        //createCorridor;
-        //createReactor;
-        //createEscapePod;
+        createStart();
+        createStaffroom();
+        createElectrical();
+        createMobileServicing();
+        createComms();
+        createMedbay();
+        createEngineRoom();
+        createVent();
+        createCorridor();
+        createReactor();
+        createAirlock();
+        createDamagedPod();
+        createEscapePod();
                 
     }
     
@@ -112,9 +119,9 @@ public class Map
      * The building is North of the Start and contains
      * important items that need to be picked up
      */
-    private void createBuilding()
+    private void createStaffroom()
     {
-        building = new Room(1, "inside the staff room");
+        staffroom = new Room(1, "inside the staff room");
         
         description = 
         "in the staff room, chairs and tables are strewn around everywhere\n"+
@@ -125,15 +132,15 @@ public class Map
         "to contain nothing useful as you watch the timer tick down on the\n"+
         "console screen above, you decide you must act fast.";
         
-        building.setDescription(description);
+        staffroom.setDescription(description);
         //TODO rename to PASSKEY
-        building.setItem(ItemTypes.KEY, "\n There is a passkey marked Engine Room here.");
-        connectRooms(start, "north", building);
+        staffroom.setItem(ItemTypes.KEY, "\n There is a passkey marked Engine Room here.");
+        connectRooms(start, "north", staffroom);
     }
 
-    private void createEastForest()
+    private void createElectrical()
     {
-        eastForest = new Room(2, "in the ship's main electrical room.");
+        electrical = new Room(2, "in the ship's main electrical room.");
         
         description = 
         "in the electrical room, wires and steam currently block your path\n"+
@@ -141,14 +148,14 @@ public class Map
         "possibly by one of your crewmates before they deserted the ship.";
         
         //TODO Set electrical switch mechanic to enable the escape pod
-        eastForest.setDescription(description);        
+        electrical.setDescription(description);        
 
-        connectRooms(start, "east", eastForest);        
+        connectRooms(start, "east", electrical);        
     }
     
-    private void createWestForest()
+    private void createMobileServicing()
     {
-       westForest = new Room(3, "in the ship's mobile service system.");
+       mobileServicing = new Room(3, "in the ship's mobile service system.");
         
        description =  
        "in the Mobile Service System, normally, this is a dedicated area for\n"+
@@ -156,17 +163,17 @@ public class Map
        "Now, the arm which normally does this is broken and laying on its side\n"+
        "with its main manipulator torn off. There is nothing of use here";
        
-       westForest.setDescription(description);        
+       mobileServicing.setDescription(description);        
         
-       connectRooms(start, "west", westForest);
+       connectRooms(start, "west", mobileServicing);
     }
     
     /**
      * 
      */
-    private void createValley()
+    private void createComms()
     {
-        valley = new Room(4, "in the ship's communications room");
+        communications = new Room(4, "in the ship's communications room");
         
         description = 
         "in the communications room it is surprisingly unaffected by the\n"+
@@ -175,25 +182,19 @@ public class Map
         "alarm lights. Over near the main comms console you can see a\n"+
         "terminal which looks unlike the others. ";
         
-        valley.setDescription(description);
+        communications.setDescription(description);
         
-        //TODO change the setWater method to setOxygen and FOOD to something else
-        valley.setWater();
-        valley.setItem(ItemTypes.FOOD, "\n There are a couple of apple trees with fruit");
+        
+        
+        communications.setItem(ItemTypes.FOOD, "\n There is a stimpack on the floor!");
             
-        connectRooms(start, "south", valley);
-        
-        // These are not really used in our map and cannot be duplicated
-        //Room forest = cloneRoom(6, eastForest); // make a copy of the forest
-        //connectRooms(valley, "east", forest);
-        
-        //forest = cloneRoom(7, westForest); // make a copy of the forest
-        //connectRooms(valley, "west", forest);        
+        connectRooms(start, "south", communications);
+              
     }
 
-    private void createSlit()
+    private void createMedbay()
     {
-        slit = new Room(5, "in the ship's medical bay");
+        medbay = new Room(5, "in the ship's medical bay");
         
         description = 
         "in the medbay, medical computers, beds and equipment are in complete\n"+
@@ -206,15 +207,15 @@ public class Map
         
         // use the oxygen outlet to fill the oxygen tank
         
-        slit.setDescription(description);
-        slit.setWater();
+        medbay.setDescription(description);
+        medbay.setWater();
         
-        connectRooms(slit, "north", valley);
+        connectRooms(medbay, "north", communications);
     }
     
-    private void createGrate()
+    private void createEngineRoom()
     {
-        grate = new Room(6, "in the ship's engine room");
+        engineRoom = new Room(6, "in the ship's engine room");
         
         // TODO: Need to have the passkey for this door from the ships bridge
         
@@ -232,13 +233,13 @@ public class Map
 
         //TODO change the grate to the door
         
-        grate.setDescription(description);
-        connectRooms(grate, "north", slit);
+        engineRoom.setDescription(description);
+        connectRooms(engineRoom, "north", medbay);
     }
     
-    private void createSmallChamber()
+    private void createVent()
     {
-        smallChamber = new Room(7, "in a ventillation shaft");
+        vent = new Room(7, "in a ventillation shaft");
         
         description = 
         "descending the ladders, you pathway is blocked and your only way\n"+
@@ -249,13 +250,14 @@ public class Map
         
         
         //TODO change vertical direction over to the the corridor
-        smallChamber.setDescription(description);
-        connectRooms(smallChamber, "up", grate);
+        vent.setItem(ItemTypes.DOORKEY,"\n THERE IS A DOORKEY MYSTERIOUSLY ON THE GROUND");
+        vent.setDescription(description);
+        connectRooms(vent, "up", engineRoom);
     }
     
-    private void createCobbles()
+    private void createCorridor()
     {
-        cobbles = new Room(8, "in a small connecting corridor");
+        corridor = new Room(8, "in a small connecting corridor");
         
         description = 
         "in a corridor heading towards the main ship's reactor. The path to the\n"+
@@ -266,24 +268,25 @@ public class Map
         "and that crew members much abandon ship immediatly";
         
         
-        cobbles.setDescription(description);
-        connectRooms(cobbles, "north", smallChamber);
+        corridor.setDescription(description);
+        connectRooms(corridor, "north", vent);
     }
     
-    private void createLargeChamber()
+    private void createReactor()
     {
-        largeChamber = new Room(9, "in a large chamber");
+        reactor = new Room(9, "in a large chamber");
         
         description = "in a splendid chamber thirty feet high.";
         description.join("\nThe walls are frozen rivers of orange stone. ",
             "There are passages off in all directions.");
         
-        largeChamber.setDescription(description);
-        connectRooms(largeChamber, "north", cobbles);
-        
-        
-        // Create the extra rooms off the main reactor room
-        Room pit = new Room(10, "in the ship's airlock");
+        reactor.setDescription(description);
+        connectRooms(reactor, "north", corridor);
+    }
+    
+    private void createAirlock()
+    {    // Create the extra rooms off the main reactor room
+        Room airlock = new Room(10, "in the ship's airlock");
         description = 
         "You enter the ships airlock. Normally this is a safe area. However,\n"+
         "the ship's systems have been badly damaged and you find that the door\n"+
@@ -291,31 +294,28 @@ public class Map
         "not respond. You cannot get back in. Your oxygen depletes and you die\n"+
         "a slow, cold agonising a death trapped in the airlock";
         
-        pit.setDescription(description);
+        airlock.setDescription(description);
         
-        connectRooms(pit, "west", largeChamber);
+        connectRooms(airlock, "west", reactor);
+    }
     
-        Room  jumble = new Room(11, "in one of the two escape pods");
+    private void createDamagedPod()
+    {
+        Room damagedPod = new Room(11, "in one of the two escape pods");
         description = 
         "in the second escape pod. It has been critically damaged and it's nose\n"+
         "has almost entirely been smashed off by high-speed debris. None of the\n"+
         "systems are operational - there is no chance of escape in this pod.";
         
-        jumble.setDescription(description);
+        damagedPod.setDescription(description);
         
-        connectRooms(jumble, "north", largeChamber);
-        
-        // Room  rocks = new Room(13, "in a large room");
-        // description = "You are in a large room full of dusty rocks. ";
-        // description.join("There are cracks everywhere.");
-        // rocks.setDescription(description);
-        
-        // connectRooms(rocks, "south", largeChamber);        
+        connectRooms(damagedPod, "north", reactor);
+    
     }
     
-    private void createKingsHall()
+    private void createEscapePod()
     {
-        kingsHall = new Room(12, "in ship's primary escape pod");
+        escapePod = new Room(12, "in ship's primary escape pod");
         
         description = 
         "in the Escape Pod. This is, by comparison to the rest of the ship,\n"+
@@ -325,12 +325,9 @@ public class Map
         "the computer is expecting an access key in order to engage and authorise\n"+
         "the launch sequence. You don’t have much time left. You must activate\n"+
         "take off the emergency launch switch cover";
-        
-        kingsHall.setItem(ItemTypes.TREASURE, 
-            "\n the console has a large switch with a cover that needs taking off");
-        
-        kingsHall.setDescription(description);
-        connectRooms(kingsHall, "east", largeChamber);        
+
+        escapePod.setDescription(description);
+        connectRooms(escapePod, "east", reactor);        
     }
     
     private void connectRooms(Room room, String direction, Room otherRoom)

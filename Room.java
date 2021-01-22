@@ -155,12 +155,12 @@ public class Room
     
     public void setWater()
     {
-        water = ItemTypes.WATER;
+        water = ItemTypes.OXYGEN;
     }
     
     public boolean hasWater()
     {
-        return (water == ItemTypes.WATER);
+        return (water == ItemTypes.OXYGEN);
     }
 }
 
