@@ -11,7 +11,7 @@
  *  executes the commands that the parser returns.
  * 
  * @author Chris Edgley & Phill Horrocks
- * @version 
+ * @version 23.1.21
  */
 
 public class Game 
@@ -89,7 +89,12 @@ public class Game
             }
             else if(player.isAlive() && currentRoom.getID() == 10 && player.isCarrying(ItemTypes.DOORKEY))
             {
-               System.out.println("You were fortunate to have the Airlock Key! Escape while you still can!");
+               System.out.println(
+               "Today is your lucky day - normally, you'd have died a painful, cold\n"+
+               "death in the icy grip of deep space, but, you had the good foresight\n"+
+               "to collect the door key in the vent. You quickly notice the key colour\n"+
+               "is the same as the airlock and you thrust the card into the reader.\n"+
+               "You haul youself through the door and to safety. The door closes.");
                finished = false;
                
             }   
@@ -213,6 +218,11 @@ public class Game
         }
     }
 
+    /**
+     * This checks to see if there is an item to take, then checks
+     * if the item you typed was the correct items. if these both
+     * are true, you take the item.
+     */
     public void takeItem(Command command)
     {
         ItemTypes item = currentRoom.getItem();
@@ -238,17 +248,10 @@ public class Game
                     currentRoom.removeItem();
                 }
                 
-                if((wantsOxygen) && (!currentRoom.hasWater()))
+                if((wantsOxygen) && (!currentRoom.hasOxygen()))
                 {
                     System.out.println("\n There is no oxygen within reach!");
                 }
-                // else if ((wantsOxygen && 
-                         // (!player.isCarrying(ItemTypes.BOTTLE))))
-                // {
-                    // System.out.println("\n You do not have a tank!");
-                    // System.out.println(" You !");
-                    // player.incEnergy(2);
-                // }
                 else
                 {
                     if(!wantsOxygen)
@@ -273,6 +276,11 @@ public class Game
         }
     }
     
+    /**
+     * This is essentially our win condition, it checks
+     * to see if you hold a certain item when you use the
+     * command
+     */
     private void launch(Command command)
     {
         
@@ -285,10 +293,14 @@ public class Game
            
     }  
     
+    /**
+     * This command allows the user to fill
+     * their tank up with oxygen
+     */
     private void fill(Command command)
-    //TODO Change BOTTLE to tank, change WATER to OXYGEN
+    
     {
-        if(currentRoom.hasWater())
+        if(currentRoom.hasOxygen())
         {
             String object = command.getSecondWord();
             

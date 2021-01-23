@@ -1,10 +1,8 @@
-
-                                                                                                                                                                   
-/**
+                                                                                                                                                                   /**
  * Write a description of class Map here.
  *
  * @author Chris Edgley & Phill Horrocks
- * @version 
+ * @version 23.1.21
  */
 public class Map
 
@@ -87,63 +85,67 @@ public class Map
      */
     private void createStart()
     {
-        start = new Room(0, " inside the ship's navigation room");
-
+        start = new Room(0, " inside the ship's navigation room");//START ROOM
         description =  
         "You awake, groggily, your vision blurred, eyes rolling around.\n"+
-        "The piercing wailing of the ship’s alarm system is bringing you round\n"+
-        "faster than your concussion would like. “WARNING: HULL BREACH. WARNING:\n"+
-        "HULL BREACH. LIFE SUPPORT SYSTEMS CRITICAL. APPROXIMATE TIME TO OXYGEN\n"+
-        "DEPLETION 3 MINUTES”. Your eyes make out the flashing of the alarm\n"+
-        "lights and the warning messages flashing on the ship’s main console.\n"+
-        "There is a clock on the console, counting down the minutes. You pick\n"+
-        "yourself up and manage to stagger to the ship’s console and turn off the\n"+
-        "cacophonous noise of the alarm. Slowly, eye’s still going in and out of focus,\n"+
-        "you bring up the ship’s schematic and damage report on the computer.\n"+
-        "The damage report states that the ship's quarters have sustained critical damage\n"+
-        "and no life forms are being reported. Your crew is gone. Just then, your suit\n"+
-        "reports a critical oxygen leak - your oxygen tank has taken damage and is losing\n"+
-        "pressure fast. The suit damage report states you have less than 2 minutes of\n"+
-        "oxygen remaining. You realise you don’t have enough oxygen to make it to the escape\n"+
-        "pod in time, unless of course you can find replacement oxygen… and fast.\n"+
-        "Your only way out is north to the navigation room. In the corner is an empty\n"+
-        "oxygen tank";
+        "The piercing wailing of the ship’s alarm system is bringing\n"+
+        "you round faster than your concussion would like. “WARNING: HULL\n"+
+        "BREACH. WARNING: HULL BREACH. LIFE SUPPORT SYSTEMS CRITICAL.\n"+
+        "APPROXIMATE TIME TO OXYGEN DEPLETION 3 MINUTES”. Your eyes\n"+
+        "make out the flashing of the alarm lights and the warning\n"+
+        "messages flashing on the ship’s main console. There is a\n"+
+        "clock on the console, counting down the minutes. You pick\n"+
+        "yourself up and manage to stagger to the ship’s console and\n"+
+        "turn off the cacophonous noise of the alarm. Slowly, eye’s\n"+
+        "still going in and out of focus, you bring up the ship’s\n"+
+        "schematic and damage report on the computer. The damage report\n"+
+        "states that the ship's quarters have sustained critical\n"+
+        "damage and no life forms are being reported. Your crew is gone.\n"+
+        "Just then, your suit reports a critical oxygen leak - your\n"+
+        "oxygen tank has taken damage and is losing pressure fast.\n"+
+        "The suit damage report states you have less than 2 minutes of\n"+
+        "oxygen remaining. You realise you don’t have enough oxygen to\n"+
+        "make it to the escape pod in time, unless of course you can\n"+
+        "find replacement oxygen… and fast. Your only way out is north\n"+
+        "to the navigation room. In the corner is an empty oxygen tank";
         
-        start.setWater();
         start.setDescription(description);
         //Rename to TANK
         start.setItem(ItemTypes.BOTTLE, "\n There is an empty oxygen tank lying in the corner");
     }
     
     /**
-     * The building is North of the Start and contains
-     * important items that need to be picked up
+     * This Staffroom has a key here to be picked up
      */
     private void createStaffroom()
     {
         staffroom = new Room(1, "inside the staff room");
         
+        // STAFFROOM
         description = 
         "in the staff room, chairs and tables are strewn around everywhere\n"+
         "making navigation difficult. There are a number of garments laying\n"+
         "around and in the corner, one in particular catches your eye, the\n"+
-        "name tag reading Stark. Captain Stark’s jacket has a small piece of\n"+
-        "paper sticking out of the chest pocket. The rest of the room seems\n"+
-        "to contain nothing useful as you watch the timer tick down on the\n"+
-        "console screen above, you decide you must act fast.";
+        "name tag reading Stark. Captain Stark’s jacket has a small key marked\n"+
+        "'LAUNCH' in the chest pocket. The rest of the room seems to contain\n"+
+        "nothing useful as you watch the timer tick down on the console screen\n"+
+        "above, you decide you must act fast.";
         
         staffroom.setDescription(description);
-        //TODO rename to PASSKEY
+        
         staffroom.setItem(ItemTypes.KEY, "\n There is a passkey marked Engine Room here.");
         connectRooms(start, "north", staffroom);
     }
 
+    /**
+     * This is the Electrical Room 
+     */
     private void createElectrical()
     {
         electrical = new Room(2, "in the ship's main electrical room.");
         
         description = 
-        "in the electrical room, wires and steam currently block your path\n"+
+        "In the electrical room, wires and steam currently block your path\n"+
         "back to the main ship but you see the engine room has been burst open,\n"+
         "possibly by one of your crewmates before they deserted the ship.";
         
@@ -153,6 +155,9 @@ public class Map
         connectRooms(start, "east", electrical);        
     }
     
+    /**
+     * This is the Mobile Servicing Room   
+     */
     private void createMobileServicing()
     {
        mobileServicing = new Room(3, "in the ship's mobile service system.");
@@ -169,7 +174,7 @@ public class Map
     }
     
     /**
-     * 
+     * This is the Communication room 
      */
     private void createComms()
     {
@@ -184,14 +189,15 @@ public class Map
         
         communications.setDescription(description);
         
-        
-        
         communications.setItem(ItemTypes.FOOD, "\n There is a stimpack on the floor!");
             
         connectRooms(start, "south", communications);
               
     }
-
+    
+    /**
+     * This is the Medbay room 
+     */
     private void createMedbay()
     {
         medbay = new Room(5, "in the ship's medical bay");
@@ -208,11 +214,14 @@ public class Map
         // use the oxygen outlet to fill the oxygen tank
         
         medbay.setDescription(description);
-        medbay.setWater();
+        medbay.setOxygen();
         
         connectRooms(medbay, "north", communications);
     }
     
+    /**
+     *  This is the Engine Room  
+     */
     private void createEngineRoom()
     {
         engineRoom = new Room(6, "in the ship's engine room");
@@ -226,17 +235,16 @@ public class Map
         "sparks are everywhere. There is no chance of repairing the warp\n"+
         "core as it’s too badly damaged. Time is running out and the warnings\n"+
         "are now showing ‘SYSTEMS CRITICAL’ on the engine room consoles...\n"+
-        "There is a door marked 'Emergency Escape This Way' but the door which\n"+
-        "which is normally open has been security locked and the door control\n"+
-        "is asking for a passkey... Beyond the door you can see ladders\n"+
-        "descending into the darkness...";
-
-        //TODO change the grate to the door
+        "There is a door marked 'Emergency Escape This Way'.Beyond the door \n"+ 
+        "you can see ladders descending into the darkness...";
         
         engineRoom.setDescription(description);
         connectRooms(engineRoom, "north", medbay);
     }
     
+    /**
+     * This is the Ventilation Shaft
+     */
     private void createVent()
     {
         vent = new Room(7, "in a ventillation shaft");
@@ -248,13 +256,14 @@ public class Map
         "its way along with you. Up ahead you can make out flashing red\n"+
         "alarm lights again";
         
-        
-        //TODO change vertical direction over to the the corridor
         vent.setItem(ItemTypes.DOORKEY,"\n THERE IS A DOORKEY MYSTERIOUSLY ON THE GROUND");
         vent.setDescription(description);
         connectRooms(vent, "up", engineRoom);
     }
     
+    /**
+     * This is a corridor
+     */
     private void createCorridor()
     {
         corridor = new Room(8, "in a small connecting corridor");
@@ -267,11 +276,13 @@ public class Map
         "the ship's computer once again announces that the ship systems are failing\n"+
         "and that crew members much abandon ship immediatly";
         
-        
         corridor.setDescription(description);
         connectRooms(corridor, "north", vent);
     }
     
+    /**
+     * This is the reactor of the ship
+     */
     private void createReactor()
     {
         reactor = new Room(9, "in a large chamber");
@@ -284,21 +295,20 @@ public class Map
         connectRooms(reactor, "north", corridor);
     }
     
+    /**
+     * This is the airlock, descriptions are in the game class
+     * play method
+     */
     private void createAirlock()
-    {    // Create the extra rooms off the main reactor room
+    {    
         Room airlock = new Room(10, "in the ship's airlock");
-        description = 
-        "You enter the ships airlock. Normally this is a safe area. However,\n"+
-        "the ship's systems have been badly damaged and you find that the door\n"+
-        "closes behind you. You press and press the control panel but it does\n"+
-        "not respond. You cannot get back in. Your oxygen depletes and you die\n"+
-        "a slow, cold agonising a death trapped in the airlock";
-        
-        airlock.setDescription(description);
         
         connectRooms(airlock, "west", reactor);
     }
     
+    /**
+     * This is the damaged Pod
+     */
     private void createDamagedPod()
     {
         Room damagedPod = new Room(11, "in one of the two escape pods");
@@ -313,6 +323,9 @@ public class Map
     
     }
     
+    /**
+     * This is the primary Escape Pod
+     */
     private void createEscapePod()
     {
         escapePod = new Room(12, "in ship's primary escape pod");
@@ -330,6 +343,9 @@ public class Map
         connectRooms(escapePod, "east", reactor);        
     }
     
+    /**
+     * This allows exits to be formed, and rooms to be connected
+     */
     private void connectRooms(Room room, String direction, Room otherRoom)
     {
         room.setExit(direction, otherRoom);

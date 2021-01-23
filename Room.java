@@ -3,17 +3,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Class Room - a room in an adventure game.
- *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * Class Room - a room in an adventure game.  
  *
  * A "Room" represents one location in the scenery of the game.  It is 
  * connected to other rooms via exits.  For each existing exit, the room 
- * stores a reference to the neighboring room.
+ * stores a reference to the neighbouring room.
  * 
  * @author Chris Edgley & Phill Horrocks
- * @version 
+ * @version 23.1.21
  */
 
 public class Room 
@@ -28,14 +25,15 @@ public class Room
     
     private ItemTypes item;
     //TODO Rename to oxygen
-    private ItemTypes water;
+    private ItemTypes oxygen;
     
     private String itemDescription;
     
     /**
-     * Create a room named "name". Initially, it has
-     * no exits. "name" is something like "kitchen" or
-     * "Court Yard".
+     * This allows the creation of a room.
+     * Initially wiht no name or exits,
+     * this data is filled elsewhere.
+     * 
      * @param name The room's name.
      */
     public Room(int id, String name) 
@@ -46,16 +44,21 @@ public class Room
         
         exits = new HashMap<>();
         item = ItemTypes.NONE;
-        water = ItemTypes.NONE;
+        oxygen = ItemTypes.NONE;
     }
 
+    /**
+     * This allows the game to get the
+     * room's ID in the app.
+     */
     public int getID()
     {
         return id;
     }
     
     /**
-     * Define an exit from this room.
+     * This allows us to define how an exit is made
+     * 
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
@@ -65,8 +68,8 @@ public class Room
     }
 
     /**
-     * @return The short description of the room
-     * (the one that was defined in the constructor).
+     * This allows the game to get the short descrption written
+     * about a room
      */
     public String getShortDescription()
     {
@@ -74,7 +77,7 @@ public class Room
     }
 
     /**
-     * Return a description of the room in the form:
+     * Return a long description of the room in the form:
      * 
      *     Exits: north west
      * @return A long description of this room
@@ -119,16 +122,28 @@ public class Room
         return exits.get(direction);
     }
     
+    /**
+     * This allows the game to be able to 
+     * get the name of the rooms
+     */
     public String getName()
     {
         return name;
     }
     
+    /**
+     * This allows the game to set a description
+     * for each room
+     */
     public void setDescription(String description)
     {
         this.description = description;
     }
     
+    /**
+     * This allows the game to get the saved description
+     * for your room
+     */
     public String getDescription()
     {
         if(item == ItemTypes.NONE)
@@ -137,30 +152,49 @@ public class Room
             return description + " " + itemDescription;
     }
     
+    /**
+     * This allows the game to set an item
+     * for the user to interact with
+     */
     public void setItem(ItemTypes item, String itemDescription)
     {
         this.item = item;
         this.itemDescription = itemDescription;
     }
     
+    /**
+     * This allows the game to put an item into the user's
+     * inventory
+     */
     public ItemTypes getItem()
     {
         return item;
     }
     
+    /**
+     * This allows the game to put an item into the user's
+     * inventory
+     */
     public void removeItem()
     {
         item = ItemTypes.NONE;
     }
     
-    public void setWater()
+    /**
+     * This allows a room to have an oxygen tank
+     */
+    public void setOxygen()
     {
-        water = ItemTypes.OXYGEN;
+        oxygen = ItemTypes.OXYGEN;
     }
     
-    public boolean hasWater()
+    /**
+     * This checks to see if the room has any oxygen
+     * in it
+     */
+    public boolean hasOxygen()
     {
-        return (water == ItemTypes.OXYGEN);
+        return (oxygen == ItemTypes.OXYGEN);
     }
 }
 

@@ -1,9 +1,8 @@
-
 /**
  * Enumeration class ItemTypes - write a description of the enum class here
  *
  * @author Chris Edgley & Phill Horrocks
- * @version 
+ * @version 23.1.21
  */
 public enum ItemTypes
 {

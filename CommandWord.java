@@ -3,7 +3,7 @@
  * along with a string in a particular language.
  * 
  * @author  Chris Edgley & Phill Horrocks
- * @version 
+ * @version 23.1.21
  */
 public enum CommandWord
 {
@@ -11,7 +11,7 @@ public enum CommandWord
     // corresponding user interface string.
     GO("go"), QUIT("quit"), HELP("help"), 
     TAKE("take"),LAUNCH ("launch"), EAT("eat"), 
-    LOOK("look"), FILL("fill"), DRINK("drink"),
+    LOOK("look"), FILL("fill"),
     INVENTORY("inventory"), UNKNOWN("?"),;
     
     // The command string.
@@ -28,6 +28,10 @@ public enum CommandWord
 
     
     /**
+     * This method turns all upper case inputs
+     * to lowere case for eassier understanding by 
+     * the program
+     * 
      * @return The command word as a string.
      */
     public String toString()
