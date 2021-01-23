@@ -7,7 +7,7 @@
 public enum ItemTypes
 {
     NONE("none"), KEY("passkey"), BOTTLE("tank"), OXYGEN("oxygen"), 
-    FOOD("stim-pack"),DOORKEY("doorkey");
+    FOOD("stimpack"),DOORKEY("doorkey");
     
     private String itemString;
     

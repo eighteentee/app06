@@ -6,20 +6,8 @@
  */
 public class Map
 
-//TODO change rooms around and room exists
 
 {
-    // private Room start;
-    // private Room building;   
-    // private Room eastForest;
-    // private Room westForest;
-    // private Room valley;
-    // private Room slit;
-    // private Room grate;
-    // private Room smallChamber;
-    // private Room cobbles;
-    // private Room largeChamber;
-    // private Room kingsHall;
     
     private String description;
     
@@ -29,10 +17,10 @@ public class Map
     private Room mobileServicing;
     private Room communications;
     private Room medbay;
-    private Room engineRoom; //grate
+    private Room engineRoom;
     private Room vent;
     private Room corridor;
-    private Room reactor; // generates airlock and damaged pod
+    private Room reactor; 
     private Room airlock;
     private Room damagedPod;
     private Room escapePod;
@@ -43,22 +31,6 @@ public class Map
      */
     public Map()
     {
-        // Room numbers
-        
-        // createStart(); // 0
-        // createBuilding(); // 1
-        // createEastForest(); // 2
-        // createWestForest(); // 3
-        // createValley(); // 4
-        // createSlit(); // 5
-        // createGrate(); // 6
-        // createSmallChamber(); // 7
-        // createCobbles(); // 8
-        // createLargeChamber(); // 9
-        // createPit(); // 10
-        // createJumble(); // 11
-        // createKingsHall(); // 12
-        
         createStart();
         createStaffroom();
         createElectrical();
@@ -87,7 +59,7 @@ public class Map
     {
         start = new Room(0, " inside the ship's navigation room");//START ROOM
         description =  
-        "You awake, groggily, your vision blurred, eyes rolling around.\n"+
+        " groggy, your vision blurred, eyes rolling around.\n"+
         "The piercing wailing of the ship’s alarm system is bringing\n"+
         "you round faster than your concussion would like. “WARNING: HULL\n"+
         "BREACH. WARNING: HULL BREACH. LIFE SUPPORT SYSTEMS CRITICAL.\n"+
@@ -169,7 +141,7 @@ public class Map
        "with its main manipulator torn off. There is nothing of use here";
        
        mobileServicing.setDescription(description);        
-        
+       
        connectRooms(start, "west", mobileServicing);
     }
     
@@ -285,11 +257,12 @@ public class Map
      */
     private void createReactor()
     {
-        reactor = new Room(9, "in a large chamber");
+        reactor = new Room(9, "in the reactor room");
         
-        description = "in a splendid chamber thirty feet high.";
-        description.join("\nThe walls are frozen rivers of orange stone. ",
-            "There are passages off in all directions.");
+        description = 
+        "The main reaction room! where the main functions of the ship reside\n" +
+        "Quickly! the airlock is east, a seemingly damage escape pod towards\n" + 
+        "south and a usable escpe pod west from you. HURRY!";
         
         reactor.setDescription(description);
         connectRooms(reactor, "north", corridor);

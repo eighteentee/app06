@@ -111,8 +111,9 @@ public class Player
     }
 
     /**
-     * This allows the user to be able to use the oxygen
-     * tank or the stimpack for extra oxygen or energy
+     * This allows the game to see what items
+     * you have and change the amount of energy
+     * and oxygen you use
      */
     private void useProvisions(ItemTypes item, int provision)
     {

@@ -26,6 +26,7 @@ public class Game
     private Room nextRoom;
     private Player player;
     private Map map;
+    
     private boolean finished = false;
     private boolean leverIsOn = false;
     //Setup logic
@@ -77,7 +78,8 @@ public class Game
             else if(player.isCarrying(ItemTypes.KEY) && currentRoom.getID() == 12 && leverIsOn == true)
             {
                 
-                System.out.println("You flash the passkey and slam that now opened button to get way away from the collapsing ship! your life is saved!");
+                System.out.println("You flash the passkey and slam that now opened button to get way away \n" + 
+                "from the collapsing ship! your life is saved!");
                 finished = true;
             }
             
@@ -143,7 +145,11 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
-
+                
+            case EAT:
+                eatFood(command);
+                break;
+                
             case LOOK:
                 System.out.println(currentRoom.getLongDescription());
                 break;
@@ -276,6 +282,16 @@ public class Game
         }
     }
     
+    private void eatFood(Command command)
+    {
+        if (player.isCarrying(ItemTypes.FOOD))
+        {
+            player.incEnergy(50);
+            player.removeItem(ItemTypes.FOOD);
+            System.out.println("You have used the stimpack and feel refreshed");
+        }    
+    }    
+    
     /**
      * This is essentially our win condition, it checks
      * to see if you hold a certain item when you use the
@@ -290,7 +306,11 @@ public class Game
             System.out.println("You have used the key to be able to pull the lever");
             
         }
-           
+        else if (!player.isCarrying(ItemTypes.KEY) && currentRoom.getID() == 12)
+        {
+            System.out.println("You need the key! you remember Mr Stark had the key. \n" +
+            "Maybe his jacket is still in the staffroom?");
+        }   
     }  
     
     /**
